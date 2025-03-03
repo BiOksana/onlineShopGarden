@@ -1,5 +1,6 @@
 package de.telran.onlineshopgarden.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import de.telran.onlineshopgarden.entity.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -32,6 +33,7 @@ public class Order {
     private LocalDateTime updatedAt = LocalDateTime.now();
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<OrderItem> orderItems;
 
     @ManyToOne

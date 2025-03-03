@@ -41,9 +41,9 @@ public class ProductService {
         Optional<Product> productOptional = repository.findById(id);
         if (productOptional.isPresent()) {
             return repository.save(product);
-        } else {
-            return null;
         }
+        return null;
+
     }
 
     @Transactional

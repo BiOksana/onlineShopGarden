@@ -42,9 +42,8 @@ public class CategoryService {
         Optional<Category> categoryOptional = repository.findById(id);
         if (categoryOptional.isPresent()) {
             return repository.save(category);
-        } else {
-            return null;
         }
+        return null;
     }
 
     @Transactional

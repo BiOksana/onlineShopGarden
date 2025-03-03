@@ -69,3 +69,12 @@ VALUES
     (6, 13),
     (7, 11),
     (7, 15);
+
+INSERT INTO orders (order_id, delivery_address, contact_phone, delivery_method, status, created_at, updated_at, user_id)
+VALUES
+    (1, '86150 Augsburg DE', '+49123456789', 'DHL', 1, NOW(), NOW(), 1);
+
+INSERT INTO order_items (order_item_id, order_id, product_id, quantity, price_at_purchase)
+VALUES
+    (1, 1, 1, 2, 599.99),
+    (2, 1, 2, 3, 19.99);
