@@ -1,6 +1,6 @@
 package de.telran.onlineshopgarden.controller;
 
-import de.telran.onlineshopgarden.entity.Product;
+import de.telran.onlineshopgarden.dto.ProductDto;
 import de.telran.onlineshopgarden.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +22,12 @@ public class ProductController {
     }
 
     @GetMapping("/all")
-    public List<Product> getAll() {
+    public List<ProductDto> getAll() {
         return service.getAll();
     }
 
     @GetMapping("{productId}")
-    public ResponseEntity<Product> getById(@PathVariable Integer productId) {
+    public ResponseEntity<ProductDto> getById(@PathVariable Integer productId) {
         return ResponseEntity.ok(service.getById(productId));
     }
 
