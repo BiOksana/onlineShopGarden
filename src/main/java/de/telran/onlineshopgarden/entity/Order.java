@@ -39,5 +39,5 @@ public class Order {
     @UpdateTimestamp
     private Instant updatedAt;
 
-    private Integer user_id;
+    private Integer userId;
 }

@@ -1,8 +1,9 @@
 package de.telran.onlineshopgarden.controller;
 
-import de.telran.onlineshopgarden.entity.Order;
+import de.telran.onlineshopgarden.dto.OrderDto;
 import de.telran.onlineshopgarden.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,13 +23,13 @@ public class OrderController {
     }
 
     @GetMapping("/all")
-    public List<Order> getAll() {
-        return service.getAll();
+    public ResponseEntity<List<OrderDto>> getAll() {
+        return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("{orderId}")
     //TODO return STATUS
-    public ResponseEntity<Order> getById(@PathVariable Integer orderId) {
+    public ResponseEntity<OrderDto> getById(@PathVariable Integer orderId) {
         return ResponseEntity.ok(service.getById(orderId));
     }
 }
