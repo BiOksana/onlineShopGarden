@@ -4,6 +4,7 @@ import de.telran.onlineshopgarden.dto.OrderCreateDto;
 import de.telran.onlineshopgarden.dto.OrderDto;
 import de.telran.onlineshopgarden.entity.Order;
 import de.telran.onlineshopgarden.entity.Product;
+import de.telran.onlineshopgarden.entity.enums.OrderStatus;
 import de.telran.onlineshopgarden.exception.ResourceNotFoundException;
 import de.telran.onlineshopgarden.mapper.OrderMapper;
 import de.telran.onlineshopgarden.repository.OrderRepository;
@@ -11,6 +12,7 @@ import de.telran.onlineshopgarden.repository.ProductRepository;
 import de.telran.onlineshopgarden.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -24,7 +26,10 @@ public class OrderService {
     private final OrderMapper mapper;
 
     @Autowired
-    public OrderService(OrderRepository repository, UserRepository userRepository, ProductRepository productRepository, OrderMapper mapper) {
+    public OrderService(OrderRepository repository,
+                        UserRepository userRepository,
+                        ProductRepository productRepository,
+                        @Qualifier("orderMapperImpl") OrderMapper mapper) {
         this.repository = repository;
         this.userRepository = userRepository;
         this.productRepository = productRepository;
@@ -65,5 +70,17 @@ public class OrderService {
         });
         order.setUser(userRepository.getReferenceById(userId));
         return mapper.entityToDto(repository.save(order));
+    }
+
+    @Transactional
+    public void cancelOrder(Integer orderId) {
+        Order order = repository.findById(orderId)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Order with id %d not found", orderId)));
+
+        if (order.getStatus() == OrderStatus.COMPLETED || order.getStatus() == OrderStatus.CANCELED) {
+            throw new IllegalStateException("Order is already completed or canceled");
+        }
+        order.setStatus(OrderStatus.CANCELED);
+        repository.save(order);
     }
 }
