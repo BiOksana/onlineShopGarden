@@ -43,4 +43,10 @@ public class OrderController {
     public ResponseEntity<OrderDto> create(@Valid @RequestBody OrderCreateDto orderCreateDto, @PathVariable int userId) {
         return new ResponseEntity<>(service.create(orderCreateDto, userId), HttpStatus.CREATED);
     }
+
+    @PutMapping("{orderId}/cancel")
+    public ResponseEntity<String> cancelOrder(@PathVariable Integer orderId) {
+        service.cancelOrder(orderId);
+        return ResponseEntity.ok("Order with id " + orderId + " has been cancelled");
+    }
 }
