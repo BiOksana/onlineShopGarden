@@ -32,13 +32,16 @@ public class Product {
     @Column(nullable = false)
     private BigDecimal price;
 
+    @Column(name = "discount_percentage")
+    private Integer discountPercentage;
+
+    private BigDecimal discountPrice;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
     private String imageUrl;
-
-    private BigDecimal discountPrice;
 
     @CreationTimestamp
     //TODO    @Column(updatable = false, nullable = false)

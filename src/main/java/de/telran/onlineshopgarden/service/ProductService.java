@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 @Service
@@ -55,4 +57,14 @@ public class ProductService {
         return mapper.entityToDto(repository.save(product));
     }
 
+    @Transactional
+    public ProductDto setDiscountPercentage(Integer productId, Integer discountPercentage) {
+        Product product = repository.findById(productId)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Product with id %d not found", productId)));
+
+        product.setDiscountPercentage(discountPercentage);
+
+        product.setDiscountPrice(product.getPrice().multiply(BigDecimal.valueOf(1 - discountPercentage / 100.0)).setScale(2, RoundingMode.HALF_UP));
+        return mapper.entityToDto(product);
+    }
 }

@@ -3,13 +3,17 @@ package de.telran.onlineshopgarden.controller;
 import de.telran.onlineshopgarden.dto.ProductDto;
 import de.telran.onlineshopgarden.service.ProductService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Validated
 @RestController
 @RequestMapping("/products")
 public class ProductController {
@@ -38,6 +42,13 @@ public class ProductController {
     @PutMapping("{productId}")
     public ResponseEntity<ProductDto> update(@PathVariable Integer productId, @Valid @RequestBody ProductDto dto) {
         return new ResponseEntity<>(service.update(productId, dto), HttpStatus.OK);
+    }
+
+    @PatchMapping("{productId}")
+    public ResponseEntity<ProductDto> setDiscountPercentage(@PathVariable Integer productId,
+                                                            @Min(0) @Max(100) @RequestParam Integer discountPercentage) {
+        ProductDto updatedProduct = service.setDiscountPercentage(productId, discountPercentage);
+        return ResponseEntity.ok(updatedProduct);
     }
 
 }

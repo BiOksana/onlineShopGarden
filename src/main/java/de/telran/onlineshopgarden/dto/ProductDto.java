@@ -1,9 +1,6 @@
 package de.telran.onlineshopgarden.dto;
 
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,6 +28,13 @@ public class ProductDto {
     @DecimalMin(value = "0.01", message = "{validation.product.price}")
     private BigDecimal price;
 
+    @Min(value = 0, message = "{validation.product.discountPercentage}")
+    @Max(value = 100, message = "{validation.product.discountPercentage}")
+    private Integer discountPercentage;
+
+    @DecimalMin(value = "0.0", message = "{validation.product.discountPrice}")
+    private BigDecimal discountPrice;
+
     @NotNull(message = "{validation.product.categoryId}")
     private Integer categoryId;
 
@@ -38,6 +42,5 @@ public class ProductDto {
     @Pattern(regexp = "^https://[^\\s/$.?#][^\\s]{0,140}\\.(jpg|jpeg|png)(\\?.*)?$", message = "{validation.product.imageValidation}")
     private String image;
 
-    @DecimalMin(value = "0.0", message = "{validation.product.discountPrice}")
-    private BigDecimal discountPrice;
+
 }
