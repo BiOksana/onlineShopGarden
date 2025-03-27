@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SourceType;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
@@ -40,10 +41,10 @@ public class Product {
 
     private BigDecimal discountPrice;
 
-    @CreationTimestamp
-    //TODO    @Column(updatable = false, nullable = false)
+    @CreationTimestamp(source = SourceType.DB)
+    @Column(updatable = false, nullable = false)
     private Instant createdAt;
 
-    @UpdateTimestamp
+    @UpdateTimestamp(source = SourceType.DB)
     private Instant updatedAt;
 }
