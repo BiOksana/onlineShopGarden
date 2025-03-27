@@ -14,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 
 @Service
 public class CartService {
@@ -58,5 +56,11 @@ public class CartService {
         return repository.findCartByUser(user)
                 .map(mapper::entityToDto)
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Cart by user with id %d not found", userId)));
+    }
+
+    @Transactional
+    public void deleteByUserId(Integer userId) {
+        User user = userRepository.getReferenceById(userId);
+        repository.deleteByUser(user);
     }
 }

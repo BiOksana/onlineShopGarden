@@ -6,5 +6,12 @@ public enum OrderStatus {
     PAID,
     IN_TRANSIT,
     DELIVERED,
-    CANCELED
+    CANCELED;
+
+    public OrderStatus next() {
+        OrderStatus[] values = OrderStatus.values();
+        int nextIndex = (this.ordinal() + 1) % values.length;
+        return values[nextIndex];
+    }
+
 }

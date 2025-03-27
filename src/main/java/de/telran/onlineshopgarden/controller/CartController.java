@@ -24,10 +24,18 @@ public class CartController {
         // TODO: JWT аутентификация
         return new ResponseEntity<>(service.getByUserId(userId), HttpStatus.OK);
     }
+
     @PostMapping
     public ResponseEntity<Void> addItem(@Valid @RequestBody CartItemAddDto dto, @RequestParam int userId) {
         // todo: replace with real userId
         service.addItem(dto, userId);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> deleteByUserId(@RequestParam Integer userId) {
+        //todo: replace with real userId
+        service.deleteByUserId(userId);
         return ResponseEntity.ok().build();
     }
 }

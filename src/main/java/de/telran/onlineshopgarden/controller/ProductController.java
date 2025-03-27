@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -40,4 +41,10 @@ public class ProductController {
         return new ResponseEntity<>(service.update(productId, dto), HttpStatus.OK);
     }
 
+    @PatchMapping("{productId}")
+    public ResponseEntity<ProductDto> setDiscountPrice(@PathVariable Integer productId,
+                                                       @RequestParam(required = false) BigDecimal discountPrice) {
+        ProductDto updatedProduct = service.setDiscountPrice(productId, discountPrice);
+        return ResponseEntity.ok(updatedProduct);
+    }
 }

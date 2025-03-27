@@ -43,4 +43,10 @@ public class OrderController {
     public ResponseEntity<OrderDto> create(@Valid @RequestBody OrderCreateDto orderCreateDto, @PathVariable int userId) {
         return new ResponseEntity<>(service.create(orderCreateDto, userId), HttpStatus.CREATED);
     }
+
+    @PatchMapping("{orderId}")
+    public ResponseEntity<Void> cancelOrder(@PathVariable Integer orderId) {
+        service.cancelOrder(orderId);
+        return ResponseEntity.ok().build();
+    }
 }
