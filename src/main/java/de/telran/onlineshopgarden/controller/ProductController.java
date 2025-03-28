@@ -47,4 +47,9 @@ public class ProductController {
         ProductDto updatedProduct = service.setDiscountPrice(productId, discountPrice);
         return ResponseEntity.ok(updatedProduct);
     }
+
+    @GetMapping("/productOfTheDay")
+    public ResponseEntity<ProductDto> getProductOfTheDay() {
+        return ResponseEntity.ok(service.getProductOfTheDay());
+    }
 }
