@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SourceType;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.Instant;
@@ -35,11 +36,11 @@ public class Order {
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
-    @CreationTimestamp
-    //TODO    @Column(updatable = false, nullable = false)
+    @CreationTimestamp(source = SourceType.DB)
+    @Column(updatable = false, nullable = false)
     private Instant createdAt;
 
-    @UpdateTimestamp
+    @UpdateTimestamp(source = SourceType.DB)
     private Instant updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
