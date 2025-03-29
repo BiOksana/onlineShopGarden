@@ -7,7 +7,10 @@ import de.telran.onlineshopgarden.exception.ResourceNotFoundException;
 import de.telran.onlineshopgarden.mapper.ProductMapper;
 import de.telran.onlineshopgarden.repository.CategoryRepository;
 import de.telran.onlineshopgarden.repository.ProductRepository;
+import de.telran.onlineshopgarden.requests.ProductsFilterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,6 +32,10 @@ public class ProductService {
 
     public List<ProductDto> getAll() {
         return mapper.entityListToDtoList(repository.findAll());
+    }
+
+    public Page<ProductDto> getFiltered(ProductsFilterRequest filterRequest, Pageable pageable) {
+        return mapper.toDtoPage(repository.findProducts(filterRequest, pageable));
     }
 
     public ProductDto getById(Integer id) {

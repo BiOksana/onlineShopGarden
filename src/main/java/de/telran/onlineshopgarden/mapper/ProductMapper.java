@@ -4,6 +4,7 @@ import de.telran.onlineshopgarden.dto.ProductDto;
 import de.telran.onlineshopgarden.entity.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -22,4 +23,8 @@ public interface ProductMapper {
     Product createOrUpdateDtoToEntity(ProductDto dto);
 
     List<ProductDto> entityListToDtoList(List<Product> productList);
+
+    default Page<ProductDto> toDtoPage(Page<Product> products) {
+        return products.map(this::entityToDto);
+    }
 }
