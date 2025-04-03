@@ -3,10 +3,10 @@ package de.telran.onlineshopgarden.service;
 import de.telran.onlineshopgarden.dto.ProductDto;
 import de.telran.onlineshopgarden.entity.Product;
 import de.telran.onlineshopgarden.exception.BadRequestException;
+import de.telran.onlineshopgarden.exception.ResourceDeletionException;
 import de.telran.onlineshopgarden.exception.ResourceNotFoundException;
 import de.telran.onlineshopgarden.mapper.ProductMapper;
-import de.telran.onlineshopgarden.repository.CategoryRepository;
-import de.telran.onlineshopgarden.repository.ProductRepository;
+import de.telran.onlineshopgarden.repository.*;
 import de.telran.onlineshopgarden.requests.ProductsFilterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -23,12 +23,23 @@ public class ProductService {
     private final ProductRepository repository;
     private final ProductMapper mapper;
     private final CategoryRepository categoryRepository;
+    private final OrderItemRepository orderItemRepository;
+    private final CartItemRepository cartItemRepository;
+    private final FavoriteRepository favoriteRepository;
 
     @Autowired
-    public ProductService(ProductRepository repository, ProductMapper mapper, CategoryRepository categoryRepository) {
+    public ProductService(ProductRepository repository,
+                          ProductMapper mapper,
+                          CategoryRepository categoryRepository,
+                          OrderItemRepository orderItemRepository,
+                          CartItemRepository cartItemRepository,
+                          FavoriteRepository favoriteRepository) {
         this.repository = repository;
         this.mapper = mapper;
         this.categoryRepository = categoryRepository;
+        this.orderItemRepository = orderItemRepository;
+        this.cartItemRepository = cartItemRepository;
+        this.favoriteRepository = favoriteRepository;
     }
 
     public List<ProductDto> getAll() {
@@ -80,5 +91,22 @@ public class ProductService {
         return repository.findProductWithHighestDiscount()
                 .map(mapper::entityToDto)
                 .orElseThrow(() -> new ResourceNotFoundException("No discounted products found"));
+    }
+
+    @Transactional
+    public void delete(Integer id) {
+        if (!repository.existsById(id)) {
+            throw new ResourceNotFoundException(String.format("Product with id %d not found", id));
+        }
+
+        if (orderItemRepository.existsByProductId(id)) {
+            throw new ResourceDeletionException(String.format("Product with id %d cannot be deleted because it has associated orders", id));
+        }
+
+        favoriteRepository.deleteByProductProductId(id);
+
+        cartItemRepository.deleteByProductId(id);
+
+        repository.deleteById(id);
     }
 }

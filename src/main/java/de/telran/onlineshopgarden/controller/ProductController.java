@@ -64,4 +64,10 @@ public class ProductController {
     public ResponseEntity<ProductDto> getProductOfTheDay() {
         return ResponseEntity.ok(service.getProductOfTheDay());
     }
+
+    @DeleteMapping("{productId}")
+    public ResponseEntity<Valid> delete(@PathVariable Integer productId) {
+        service.delete(productId);
+        return ResponseEntity.ok().build();
+    }
 }
