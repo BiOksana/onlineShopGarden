@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS users (
   name VARCHAR(50) NOT NULL,
   email VARCHAR(45) UNIQUE NOT NULL,
   phone_number VARCHAR(45) NOT NULL,
-  password_hash VARCHAR(45) NOT NULL,
+  password_hash VARCHAR(155) NOT NULL,
   role VARCHAR(45) NOT NULL,
   PRIMARY KEY (user_id));
 

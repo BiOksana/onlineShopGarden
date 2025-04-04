@@ -17,6 +17,7 @@
         <java.version>17</java.version>
         <lombok.version>1.18.36</lombok.version>
         <mapstruct.version>1.6.2</mapstruct.version>
+        <jsonwebtoken.version>0.12.6</jsonwebtoken.version>
     </properties>
     <dependencies>
         <dependency>
@@ -85,12 +86,28 @@
             <version>2.7.0</version>
         </dependency>
 
-        <!--        		        XML REST data format-->
-        <!--        <dependency>-->
-        <!--            <groupId>com.fasterxml.jackson.dataformat</groupId>-->
-        <!--            <artifactId>jackson-dataformat-xml</artifactId>-->
-        <!--        </dependency>-->
-
+        <!--        Spring security -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>${jsonwebtoken.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>${jsonwebtoken.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>${jsonwebtoken.version}</version>
+            <scope>runtime</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -133,7 +150,4 @@
             </plugin>
         </plugins>
     </build>
-
-
-
 </project>

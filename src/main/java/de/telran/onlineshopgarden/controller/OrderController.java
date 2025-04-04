@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,26 +23,21 @@ public class OrderController {
         this.service = service;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMINISTRATOR')")
     @GetMapping("/all")
     public ResponseEntity<List<OrderDto>> getAll() {
         return new ResponseEntity<>(service.getAll(), HttpStatus.OK);
     }
 
-    @GetMapping("{orderId}")
-    public ResponseEntity<OrderDto> getById(@PathVariable Integer orderId) {
-        return ResponseEntity.ok(service.getById(orderId));
-    }
-
-    @GetMapping("/history/{userId}")
-    public ResponseEntity<List<OrderDto>> getOrderHistory(@PathVariable Integer userId) {
-        List<OrderDto> orderHistory = service.getOrderHistory(userId);
+    @GetMapping("/history")
+    public ResponseEntity<List<OrderDto>> getOrderHistory() {
+        List<OrderDto> orderHistory = service.getOrderHistory();
         return ResponseEntity.ok(orderHistory);
     }
 
-    @PostMapping("{userId}")
-    //TODO JWT user
-    public ResponseEntity<OrderDto> create(@Valid @RequestBody OrderCreateDto orderCreateDto, @PathVariable int userId) {
-        return new ResponseEntity<>(service.create(orderCreateDto, userId), HttpStatus.CREATED);
+    @PostMapping
+    public ResponseEntity<OrderDto> create(@Valid @RequestBody OrderCreateDto orderCreateDto) {
+        return new ResponseEntity<>(service.create(orderCreateDto), HttpStatus.CREATED);
     }
 
     @PatchMapping("{orderId}")

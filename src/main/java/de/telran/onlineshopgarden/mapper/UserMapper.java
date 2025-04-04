@@ -16,6 +16,7 @@ public interface UserMapper {
 
     List<UserDto> entityListToDto(List<User> entities);
 
+    @Mapping(target = "refreshToken", ignore = true)
     @Mapping(target = "orders", ignore = true)
     @Mapping(target = "cart", ignore = true)
     @Mapping(target = "phoneNumber", source = "phone")

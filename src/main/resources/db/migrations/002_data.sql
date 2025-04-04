@@ -27,23 +27,23 @@ values
     (14, 'Rake', 'Maintain a pristine garden with our reliable Rake. Perfect for leaf and debris removal, it ensures a tidy outdoor space. Upgrade your gardening arsenal with this essential tool.', 38.0, 5, 'https://images.ctfassets.net/zma7thmmcinb/46JNtlvxFdhCD2XPHHziLc/31fe4425eff26086a7eb884a4384d85b/find-the-right-rake-plastic-rake.jpg', NULL, '2025-03-11 10:36:00', NULL),
     (15, 'Gardening scissors', 'Precision meets functionality with our Gardening Scissors. Trim and shape your garden with ease. Elevate your gardening skills with these sharp and durable scissors.', 20.0, 5, 'https://cdn.thewirecutter.com/wp-content/uploads/2015/06/pruningshears-2x1-.jpg?auto=webp&quality=75&crop=2:1&width=1024&dpr=2', NULL, '2025-03-12 12:16:00', NULL);
 
-insert into users (user_id, name, email, phone_number, password_hash, role)
-values
-    (1, 'John Smith', 'john.smith@example.com', '1111111111', 'hashedpassword1', 'CLIENT'),
-    (2, 'Emma Johnson', 'emma.johnson@example.com', '2222222222', 'hashedpassword2', 'CLIENT'),
-    (3, 'Olivia Brown', 'olivia.brown@example.com', '3333333333', 'hashedpassword3', 'CLIENT'),
-    (4, 'Liam Williams', 'liam.williams@example.com', '4444444444', 'hashedpassword4', 'CLIENT'),
-    (5, 'Noah Jones', 'noah.jones@example.com', '5555555555', 'hashedpassword5', 'CLIENT'),
-    (6, 'Sophia Garcia', 'sophia.garcia@example.com', '6666666666', 'hashedpassword6', 'CLIENT'),
-    (7, 'Mason Martinez', 'mason.martinez@example.com', '7777777777', 'hashedpassword7', 'CLIENT'),
-    (8, 'Isabella Miller', 'isabella.miller@example.com', '8888888888', 'hashedpassword8', 'CLIENT'),
-    (9, 'Lucas Davis', 'lucas.davis@example.com', '9999999999', 'hashedpassword9', 'CLIENT'),
-    (10, 'Charlotte Rodriguez', 'charlotte.rodriguez@example.com', '1010101010', 'hashedpassword10', 'CLIENT'),
-    (11, 'Elijah Hernandez', 'elijah.hernandez@example.com', '1112131415', 'hashedpassword11', 'CLIENT'),
-    (12, 'Amelia Wilson', 'amelia.wilson@example.com', '1213141516', 'hashedpassword12', 'CLIENT'),
-    (13, 'Benjamin Anderson', 'benjamin.anderson@example.com', '1314151617', 'hashedpassword13', 'CLIENT'),
-    (14, 'James Thomas', 'james.thomas@example.com', '1415161718', 'hashedpassword14', 'ADMINISTRATOR'),
-    (15, 'William White', 'william.white@example.com', '1516171819', 'hashedpassword15', 'ADMINISTRATOR');
+INSERT INTO users (user_id, name, email, phone_number, password_hash, role)
+VALUES
+    (1, 'John Smith', 'john.smith@example.com', '1111111111', '$2a$10$QqLIc6MHjJ4eFyvBWHY5nOY6BCrjmzq/Xs5fqqi5COJmLUE27sojS', 'CLIENT'),
+    (2, 'Emma Johnson', 'emma.johnson@example.com', '2222222222', '$2a$10$QqLIc6MHjJ4eFyvBWHY5nOY6BCrjmzq/Xs5fqqi5COJmLUE27sojS', 'CLIENT'),
+    (3, 'Olivia Brown', 'olivia.brown@example.com', '3333333333', '$2a$10$QqLIc6MHjJ4eFyvBWHY5nOY6BCrjmzq/Xs5fqqi5COJmLUE27sojS', 'CLIENT'),
+    (4, 'Liam Williams', 'liam.williams@example.com', '4444444444', '$2a$10$QqLIc6MHjJ4eFyvBWHY5nOY6BCrjmzq/Xs5fqqi5COJmLUE27sojS', 'CLIENT'),
+    (5, 'Noah Jones', 'noah.jones@example.com', '5555555555', '$2a$10$QqLIc6MHjJ4eFyvBWHY5nOY6BCrjmzq/Xs5fqqi5COJmLUE27sojS', 'CLIENT'),
+    (6, 'Sophia Garcia', 'sophia.garcia@example.com', '6666666666', '$2a$10$QqLIc6MHjJ4eFyvBWHY5nOY6BCrjmzq/Xs5fqqi5COJmLUE27sojS', 'CLIENT'),
+    (7, 'Mason Martinez', 'mason.martinez@example.com', '7777777777', '$2a$10$QqLIc6MHjJ4eFyvBWHY5nOY6BCrjmzq/Xs5fqqi5COJmLUE27sojS', 'CLIENT'),
+    (8, 'Isabella Miller', 'isabella.miller@example.com', '8888888888', '$2a$10$QqLIc6MHjJ4eFyvBWHY5nOY6BCrjmzq/Xs5fqqi5COJmLUE27sojS', 'CLIENT'),
+    (9, 'Lucas Davis', 'lucas.davis@example.com', '9999999999', '$2a$10$QqLIc6MHjJ4eFyvBWHY5nOY6BCrjmzq/Xs5fqqi5COJmLUE27sojS', 'CLIENT'),
+    (10, 'Charlotte Rodriguez', 'charlotte.rodriguez@example.com', '1010101010', '$2a$10$QqLIc6MHjJ4eFyvBWHY5nOY6BCrjmzq/Xs5fqqi5COJmLUE27sojS', 'CLIENT'),
+    (11, 'Elijah Hernandez', 'elijah.hernandez@example.com', '1112131415', '$2a$10$QqLIc6MHjJ4eFyvBWHY5nOY6BCrjmzq/Xs5fqqi5COJmLUE27sojS', 'CLIENT'),
+    (12, 'Amelia Wilson', 'amelia.wilson@example.com', '1213141516', '$2a$10$QqLIc6MHjJ4eFyvBWHY5nOY6BCrjmzq/Xs5fqqi5COJmLUE27sojS', 'CLIENT'),
+    (13, 'Benjamin Anderson', 'benjamin.anderson@example.com', '1314151617', '$2a$10$QqLIc6MHjJ4eFyvBWHY5nOY6BCrjmzq/Xs5fqqi5COJmLUE27sojS', 'CLIENT'),
+    (14, 'James Thomas', 'james.thomas@example.com', '1415161718', '$2a$10$QqLIc6MHjJ4eFyvBWHY5nOY6BCrjmzq/Xs5fqqi5COJmLUE27sojS', 'ADMINISTRATOR'),
+    (15, 'William White', 'william.white@example.com', '1516171819', '$2a$10$QqLIc6MHjJ4eFyvBWHY5nOY6BCrjmzq/Xs5fqqi5COJmLUE27sojS', 'ADMINISTRATOR');
 
 insert into carts (cart_id, user_id)
 values

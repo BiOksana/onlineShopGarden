@@ -10,10 +10,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @RestController
 @RequestMapping("/products")
@@ -23,11 +23,6 @@ public class ProductController {
     @Autowired
     public ProductController(ProductService service) {
         this.service = service;
-    }
-
-    @GetMapping("/all")
-    public List<ProductDto> getAll() {
-        return service.getAll();
     }
 
     @GetMapping
@@ -43,16 +38,19 @@ public class ProductController {
         return ResponseEntity.ok(service.getById(productId));
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMINISTRATOR')")
     @PostMapping()
     public ResponseEntity<ProductDto> create(@Valid @RequestBody ProductDto dto) {
         return new ResponseEntity<>(service.create(dto), HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMINISTRATOR')")
     @PutMapping("{productId}")
     public ResponseEntity<ProductDto> update(@PathVariable Integer productId, @Valid @RequestBody ProductDto dto) {
         return new ResponseEntity<>(service.update(productId, dto), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMINISTRATOR')")
     @PatchMapping("{productId}")
     public ResponseEntity<ProductDto> setDiscountPrice(@PathVariable Integer productId,
                                                        @RequestParam(required = false) BigDecimal discountPrice) {

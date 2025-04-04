@@ -12,6 +12,7 @@ import de.telran.onlineshopgarden.repository.FavoriteRepository;
 import de.telran.onlineshopgarden.repository.UserRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,9 +29,10 @@ public class UserService {
     private final CartRepository cartRepository;
     private final CartItemRepository cartItemRepository;
     private final EntityManager entityManager;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository repository, UserMapper mapper, OrderService orderService, FavoriteRepository favoriteRepository, CartRepository cartRepository, CartItemRepository cartItemRepository, EntityManager entityManager) {
+    public UserService(UserRepository repository, UserMapper mapper, OrderService orderService, FavoriteRepository favoriteRepository, CartRepository cartRepository, CartItemRepository cartItemRepository, EntityManager entityManager, PasswordEncoder passwordEncoder) {
         this.repository = repository;
         this.mapper = mapper;
         this.orderService = orderService;
@@ -38,6 +40,7 @@ public class UserService {
         this.cartRepository = cartRepository;
         this.cartItemRepository = cartItemRepository;
         this.entityManager = entityManager;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<UserDto> getAll() {
@@ -53,7 +56,7 @@ public class UserService {
     @Transactional
     public UserDto create(UserCreateDto dto) {
         User user = mapper.createDtoToEntity(dto);
-        // TODO: add password encryption
+        user.setPasswordHash(passwordEncoder.encode(dto.getPassword()));
         return mapper.entityToDto(repository.save(user));
     }
 
@@ -87,4 +90,5 @@ public class UserService {
         user.setPhoneNumber("0000000000");
         user.setPasswordHash("DELETED");
     }
+
 }
