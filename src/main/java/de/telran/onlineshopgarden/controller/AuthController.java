@@ -3,6 +3,7 @@ package de.telran.onlineshopgarden.controller;
 import de.telran.onlineshopgarden.dto.JwtRequestRefresh;
 import de.telran.onlineshopgarden.dto.JwtResponse;
 import de.telran.onlineshopgarden.security.AuthService;
+import io.swagger.v3.oas.annotations.Operation;
 import jakarta.security.auth.message.AuthException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +46,7 @@ public class AuthController {
      * @return a ResponseEntity containing the JWT response.
      * @throws AuthException if token refresh fails.
      */
+    @Operation(summary = "Get new access token")
     @PostMapping("token")
     public ResponseEntity<JwtResponse> getNewAccessToken(@RequestBody JwtRequestRefresh request) throws AuthException {
         final JwtResponse token = authService.getAccessToken(request.getRefreshToken());
@@ -58,6 +60,7 @@ public class AuthController {
      * @return a ResponseEntity containing the JWT response.
      * @throws AuthException if token refresh fails.
      */
+    @Operation(summary = "Get new refresh token")
     @PostMapping("refresh")
     public ResponseEntity<JwtResponse> getNewRefreshToken(@RequestBody JwtRequestRefresh request) throws AuthException {
         final JwtResponse token = authService.refresh(request.getRefreshToken());

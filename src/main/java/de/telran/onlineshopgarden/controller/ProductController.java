@@ -29,6 +29,7 @@ public class ProductController {
         this.service = service;
     }
 
+    @Operation(summary = "Get all products")
     @GetMapping
     public Page<ProductDto> getProducts(
             ProductsFilterRequest filterRequest,
@@ -72,6 +73,7 @@ public class ProductController {
         return ResponseEntity.ok(updatedProduct);
     }
 
+    @Operation(summary = "Delete product by id")
     @PreAuthorize("hasRole('ROLE_ADMINISTRATOR')")
     @DeleteMapping("{productId}")
     public ResponseEntity<Valid> delete(@PathVariable Integer productId) {

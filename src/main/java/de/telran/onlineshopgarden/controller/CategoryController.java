@@ -51,6 +51,7 @@ public class CategoryController {
         return ResponseEntity.ok(service.update(categoryId, dto));
     }
 
+    @Operation(summary = "Delete category by id")
     @PreAuthorize("hasRole('ROLE_ADMINISTRATOR')")
     @DeleteMapping("{categoryId}")
     public ResponseEntity<Void> delete(@PathVariable Integer categoryId) {
