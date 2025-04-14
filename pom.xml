@@ -6,7 +6,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.4.3</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
     <groupId>de.telran</groupId>
     <artifactId>onlineShopGarden</artifactId>
@@ -19,6 +19,7 @@
         <mapstruct.version>1.6.2</mapstruct.version>
         <jsonwebtoken.version>0.12.6</jsonwebtoken.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -59,7 +60,6 @@
             <scope>runtime</scope>
         </dependency>
 
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -67,7 +67,6 @@
             <optional>true</optional>
         </dependency>
 
-        <!--DTO management-->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
@@ -92,14 +91,12 @@
             <version>4.29.0</version>
         </dependency>
 
-        <!--   Spring doc & Swagger support. URL: http://localhost:8080/swagger-ui/index.html-->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>2.7.0</version>
         </dependency>
 
-        <!--        Spring security -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
