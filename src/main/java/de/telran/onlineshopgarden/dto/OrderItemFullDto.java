@@ -13,9 +13,9 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class OrderItemFullDto {
 
-    private String orderItemId;
+    private Long id;
 
-    private String productId;
+    private Long productId;
 
     private int quantity;
 

@@ -12,10 +12,10 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Integer> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
     @Query("SELECT p FROM Product p WHERE " +
-            "(:#{#filterRequest.category} IS NULL OR p.category.categoryId = :#{#filterRequest.category}) AND " +
+            "(:#{#filterRequest.category} IS NULL OR p.category.id = :#{#filterRequest.category}) AND " +
             "(:#{#filterRequest.minPrice} IS NULL OR p.price >= :#{#filterRequest.minPrice}) AND " +
             "(:#{#filterRequest.maxPrice} IS NULL OR p.price <= :#{#filterRequest.maxPrice}) AND " +
             "(:#{#filterRequest.discount} IS FALSE OR p.discountPrice IS NOT NULL)")
@@ -27,5 +27,5 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             "LIMIT 1")
     Optional<Product> findProductWithHighestDiscount();
 
-    boolean existsByCategoryCategoryId(Integer categoryId);
+    boolean existsByCategoryId(Long categoryId);
 }

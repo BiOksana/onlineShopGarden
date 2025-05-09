@@ -28,13 +28,13 @@ public class FavoriteController implements FavoriteControllerApi {
     }
 
     @PostMapping
-    public ResponseEntity<Void> addToFavorites(@RequestParam Integer productId) {
+    public ResponseEntity<Void> addToFavorites(@RequestParam Long productId) {
         service.addToFavorites(productId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping
-    public ResponseEntity<Void> removeFromFavorites(@RequestParam Integer productId) {
+    public ResponseEntity<Void> removeFromFavorites(@RequestParam Long productId) {
         service.removeFromFavorites(productId);
         return new ResponseEntity<>(HttpStatus.OK);
     }

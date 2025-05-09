@@ -39,7 +39,7 @@ public interface UserControllerApi {
     })
     ResponseEntity<UserDto> getById(
             @Parameter(description = "The ID of the user to retrieve", required = true)
-            @PathVariable Integer userId);
+            @PathVariable Long userId);
 
     @Operation(
             summary = "Public endpoint - Register a new user",
@@ -89,7 +89,7 @@ public interface UserControllerApi {
     })
     ResponseEntity<UserDto> update(
             @Parameter(description = "ID of the user to update", required = true)
-            @PathVariable Integer userId,
+            @PathVariable Long userId,
             @Valid @RequestBody UserUpdateDto dto);
 
 
@@ -114,5 +114,5 @@ public interface UserControllerApi {
     })
     ResponseEntity<Void> mask(
             @Parameter(description = "ID of the user to delete", required = true)
-            @PathVariable Integer userId);
+            @PathVariable Long userId);
 }

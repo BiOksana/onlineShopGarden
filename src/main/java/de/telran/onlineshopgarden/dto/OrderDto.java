@@ -15,9 +15,9 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderDto {
 
-    private String orderId;
+    private Long id;
 
-    private String userId;
+    private Long userId;
 
     private String deliveryAddress;
 

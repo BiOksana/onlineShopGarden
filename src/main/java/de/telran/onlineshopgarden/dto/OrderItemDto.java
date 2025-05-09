@@ -12,7 +12,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class OrderItemDto {
 
-    private String productId;
+    private Long productId;
 
     @Min(value = 1, message = "{validation.orderItem.quantityMin}")
     private int quantity;

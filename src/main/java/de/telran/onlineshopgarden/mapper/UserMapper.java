@@ -22,6 +22,6 @@ public interface UserMapper {
     @Mapping(target = "phoneNumber", source = "phone")
     @Mapping(target = "passwordHash", ignore = true)
     @Mapping(target = "role", constant = "CLIENT")
-    @Mapping(target = "userId", ignore = true)
+    @Mapping(target = "id", ignore = true)
     User createDtoToEntity(UserCreateDto dto);
 }

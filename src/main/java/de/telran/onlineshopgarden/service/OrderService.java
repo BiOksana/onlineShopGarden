@@ -43,13 +43,13 @@ public class OrderService {
         return mapper.entityListToDtoList(repository.findAll());
     }
 
-    public OrderDto getById(Integer orderId) {
-        Order order = repository.findById(orderId)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Order with id %d not found", orderId)));
+    public OrderDto getById(Long id) {
+        Order order = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Order with id %d not found", id)));
         User user = authService.getCurrentUser();
 
         boolean isAdmin = authService.isCurrentUserAdmin();
-        if (!order.getUser().getUserId().equals(user.getUserId()) && !isAdmin) {
+        if (!order.getUser().getId().equals(user.getId()) && !isAdmin) {
             throw new AccessForbiddenException("You cannot view orders that don't belong to you");
         }
 
@@ -66,7 +66,7 @@ public class OrderService {
         User user = authService.getCurrentUser();
         Order order = mapper.createDtoToEntity(orderCreateDto);
         order.getOrderItems().forEach(item -> {
-            Integer productId = item.getProductId();
+            Long productId = item.getProductId();
             Product product = productRepository.findById(productId)
                     .orElseThrow(() -> new ResourceNotFoundException(String.format("Product with id %d not found", productId)));
             BigDecimal priceAtPurchase;
@@ -78,17 +78,17 @@ public class OrderService {
             item.setOrder(order);
             item.setPriceAtPurchase(priceAtPurchase);
         });
-        order.setUser(userRepository.getReferenceById(user.getUserId()));
+        order.setUser(userRepository.getReferenceById(user.getId()));
         return mapper.entityToDto(repository.save(order));
     }
 
     @Transactional
-    public void cancelOrder(Integer orderId) {
-        Order order = repository.findById(orderId)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Order with id %d not found", orderId)));
+    public void cancelOrder(Long id) {
+        Order order = repository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Order with id %d not found", id)));
         User user = authService.getCurrentUser();
 
-        if (!order.getUser().getUserId().equals(user.getUserId())) {
+        if (!order.getUser().getId().equals(user.getId())) {
             throw new AccessForbiddenException("You cannot cancel orders that don't belong to you");
         }
 

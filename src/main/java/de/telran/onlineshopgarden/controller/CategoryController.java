@@ -28,7 +28,7 @@ public class CategoryController implements CategoryControllerApi {
     }
 
     @GetMapping("{categoryId}")
-    public ResponseEntity<CategoryDto> getById(@PathVariable Integer categoryId) {
+    public ResponseEntity<CategoryDto> getById(@PathVariable Long categoryId) {
         return ResponseEntity.ok(service.getById(categoryId));
     }
 
@@ -40,13 +40,13 @@ public class CategoryController implements CategoryControllerApi {
 
     @PreAuthorize("hasRole('ROLE_ADMINISTRATOR')")
     @PutMapping("{categoryId}")
-    public ResponseEntity<CategoryDto> update(@PathVariable Integer categoryId, @Valid @RequestBody CategoryDto dto) {
+    public ResponseEntity<CategoryDto> update(@PathVariable Long categoryId, @Valid @RequestBody CategoryDto dto) {
         return ResponseEntity.ok(service.update(categoryId, dto));
     }
 
     @PreAuthorize("hasRole('ROLE_ADMINISTRATOR')")
     @DeleteMapping("{categoryId}")
-    public ResponseEntity<Void> delete(@PathVariable Integer categoryId) {
+    public ResponseEntity<Void> delete(@PathVariable Long categoryId) {
         service.delete(categoryId);
         return ResponseEntity.ok().build();
     }

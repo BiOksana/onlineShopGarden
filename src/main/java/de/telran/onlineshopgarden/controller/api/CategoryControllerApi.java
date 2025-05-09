@@ -29,7 +29,7 @@ public interface CategoryControllerApi {
     })
     ResponseEntity<CategoryDto> getById(
             @Parameter(description = "The ID of the category to retrieve", required = true)
-            @PathVariable Integer categoryId);
+            @PathVariable Long categoryId);
 
     @Operation(summary = "Admin only - Create new category")
     @ApiResponses(value = {
@@ -50,7 +50,7 @@ public interface CategoryControllerApi {
     })
     ResponseEntity<CategoryDto> update(
             @Parameter(description = "The ID of the category to update", required = true)
-            @PathVariable Integer categoryId,
+            @PathVariable Long categoryId,
             @Valid @RequestBody CategoryDto dto);
 
     @Operation(summary = "Admin only - Delete category by id")
@@ -63,5 +63,5 @@ public interface CategoryControllerApi {
     })
     ResponseEntity<Void> delete(
             @Parameter(description = "The ID of the category to delete", required = true)
-            @PathVariable Integer categoryId);
+            @PathVariable Long categoryId);
 }

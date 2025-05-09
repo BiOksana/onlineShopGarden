@@ -24,7 +24,8 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer orderId;
+    @Column(columnDefinition = "int")
+    private Long id;
 
     private String deliveryAddress;
 
@@ -49,5 +50,4 @@ public class Order {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems;
-
 }

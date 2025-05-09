@@ -8,10 +8,10 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface CartRepository extends JpaRepository<Cart, Integer> {
+public interface CartRepository extends JpaRepository<Cart, Long> {
 
-    Optional<Cart> findByUserUserId(Integer userId);
+    Optional<Cart> findByUserId(Long userId);
 
     @Modifying
-    void deleteByUserUserId(Integer userId);
+    void deleteByUserId(Long userId);
 }

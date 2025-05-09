@@ -47,7 +47,7 @@ public interface ProductControllerApi {
     })
     ResponseEntity<ProductDto> getById(
             @Parameter(description = "The ID of the product to retrieve", required = true)
-            @PathVariable Integer productId);
+            @PathVariable Long productId);
 
     @Operation(summary = "Public endpoint - Get product with highest discount")
     @ApiResponses(value = {
@@ -77,7 +77,7 @@ public interface ProductControllerApi {
     })
     ResponseEntity<ProductDto> update(
             @Parameter(description = "The ID of the product to update", required = true)
-            @PathVariable Integer productId,
+            @PathVariable Long productId,
             @Valid @RequestBody ProductDto dto);
 
     @Operation(summary = "Admin only - Set discount price for product",
@@ -91,7 +91,7 @@ public interface ProductControllerApi {
     })
     ResponseEntity<ProductDto> setDiscountPrice(
             @Parameter(description = "The ID of the product to update discount price", required = true)
-            @PathVariable Integer productId,
+            @PathVariable Long productId,
             @DecimalMin(value = "0.01", message = "{validation.product.discountPrice}")
             @RequestParam(required = false) BigDecimal discountPrice);
 
@@ -106,5 +106,5 @@ public interface ProductControllerApi {
     })
     ResponseEntity<Void> delete(
             @Parameter(description = "The ID of the product to delete", required = true)
-            @PathVariable Integer productId);
+            @PathVariable Long productId);
 }

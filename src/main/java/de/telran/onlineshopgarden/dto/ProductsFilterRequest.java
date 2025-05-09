@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 public class ProductsFilterRequest {
 
     @Schema(description = "Category ID to filter products")
-    private Integer category;
+    private Long category;
 
     @Schema(description = "Minimum price of the product")
     private BigDecimal minPrice;

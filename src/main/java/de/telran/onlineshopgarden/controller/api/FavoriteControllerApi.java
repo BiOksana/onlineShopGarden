@@ -28,12 +28,13 @@ public interface FavoriteControllerApi {
             @ApiResponse(responseCode = "401", description = "UNAUTHORIZED"),
             @ApiResponse(responseCode = "403", description = "FORBIDDEN")
     })
-    ResponseEntity<Void> addToFavorites(@RequestParam Integer productId);
+    ResponseEntity<Void> addToFavorites(@RequestParam Long productId);
 
-    @Operation(summary = "Remove product from favorites for the currently authenticated user")@ApiResponses(value = {
+    @Operation(summary = "Remove product from favorites for the currently authenticated user")
+    @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "401", description = "UNAUTHORIZED"),
             @ApiResponse(responseCode = "403", description = "FORBIDDEN")
     })
-    ResponseEntity<Void> removeFromFavorites(@RequestParam Integer productId);
+    ResponseEntity<Void> removeFromFavorites(@RequestParam Long productId);
 }

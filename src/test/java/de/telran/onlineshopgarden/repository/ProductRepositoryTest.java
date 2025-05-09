@@ -34,7 +34,7 @@ class ProductRepositoryTest {
 
     @Test
     void findProductWithHighestDiscountMustReturnNewProductWithMaxDiscount() {
-        Category category = categoryRepository.findById(1).orElseThrow();
+        Category category = categoryRepository.findById(1L).orElseThrow();
 
         Product newProduct = new Product();
         newProduct.setName("Super Discount Product");
@@ -54,8 +54,8 @@ class ProductRepositoryTest {
     }
 
     @Test
-    void existsByCategoryCategoryIdMustReturnTrueForExistingCategory() {
-        boolean exists = productRepository.existsByCategoryCategoryId(1);
+    void existsByCategoryIdMustReturnTrueForExistingCategory() {
+        boolean exists = productRepository.existsByCategoryId(1L);
         assertTrue(exists, "Category with id 1 must exist");
     }
 }

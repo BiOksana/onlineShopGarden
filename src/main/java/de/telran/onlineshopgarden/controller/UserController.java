@@ -35,7 +35,7 @@ public class UserController implements UserControllerApi {
 
     @PreAuthorize("hasRole('ROLE_ADMINISTRATOR')")
     @GetMapping("{userId}")
-    public ResponseEntity<UserDto> getById(@PathVariable Integer userId) {
+    public ResponseEntity<UserDto> getById(@PathVariable Long userId) {
         return ResponseEntity.ok(service.getById(userId));
     }
 
@@ -52,13 +52,13 @@ public class UserController implements UserControllerApi {
 
     @PreAuthorize("hasAnyRole('ROLE_CLIENT', 'ROLE_ADMINISTRATOR')")
     @PutMapping("{userId}")
-    public ResponseEntity<UserDto> update(@PathVariable Integer userId, @Valid @RequestBody UserUpdateDto dto) {
+    public ResponseEntity<UserDto> update(@PathVariable Long userId, @Valid @RequestBody UserUpdateDto dto) {
         return ResponseEntity.ok(service.update(userId, dto));
     }
 
     @PreAuthorize("hasAnyRole('ROLE_CLIENT', 'ROLE_ADMINISTRATOR')")
     @DeleteMapping("{userId}")
-    public ResponseEntity<Void> mask(@PathVariable Integer userId) {
+    public ResponseEntity<Void> mask(@PathVariable Long userId) {
         service.mask(userId);
         return ResponseEntity.ok().build();
     }

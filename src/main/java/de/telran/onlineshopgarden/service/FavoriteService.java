@@ -44,11 +44,11 @@ public class FavoriteService {
     }
 
     @Transactional
-    public void addToFavorites(Integer productId) {
+    public void addToFavorites(Long productId) {
         User user = authService.getCurrentUser();
 
         if (user.getFavorites().stream()
-                .anyMatch(f -> f.getProduct().getProductId().equals(productId))) {
+                .anyMatch(f -> f.getProduct().getId().equals(productId))) {
             return;
         }
 
@@ -61,10 +61,10 @@ public class FavoriteService {
     }
 
     @Transactional
-    public void removeFromFavorites(Integer productId) {
+    public void removeFromFavorites(Long productId) {
         User user = authService.getCurrentUser();
         Favorite favorite = user.getFavorites().stream()
-                .filter(f -> f.getProduct().getProductId().equals(productId)).findFirst()
+                .filter(f -> f.getProduct().getId().equals(productId)).findFirst()
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Product with id %d not found", productId)));
         user.getFavorites().remove(favorite);
         favorite.setUser(null);

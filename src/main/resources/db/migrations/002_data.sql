@@ -1,7 +1,7 @@
 -- liquibase formatted sql
 -- changeset oksana.bibikova:002
 
-insert into categories (category_id, name, image_url)
+insert into categories (id, name, image_url)
 values
     (1, 'Planting material', 'https://raw.githubusercontent.com/tel-ran-de/telran_backend_garden_shop/master/public/category_img/1.jpeg'),
     (2, 'Protective products and septic tanks', 'https://raw.githubusercontent.com/tel-ran-de/telran_backend_garden_shop/master/public/category_img/2.jpeg'),
@@ -9,7 +9,7 @@ values
     (4, 'Pots and planters', 'https://raw.githubusercontent.com/tel-ran-de/telran_backend_garden_shop/master/public/category_img/4.jpeg'),
     (5, 'Tools and equipment', 'https://raw.githubusercontent.com/tel-ran-de/telran_backend_garden_shop/master/public/category_img/5.jpeg');
 
-insert into products (product_id, name, description, price, category_id, image_url, discount_price, created_at, updated_at)
+insert into products (id, name, description, price, category_id, image_url, discount_price, created_at, updated_at)
 values
     (1, 'Tulip', 'Elevate your garden with our exquisite Tulip planting material. Embrace the beauty of nature as these premium Tulip bulbs promise vibrant blooms in an array of enchanting colors. Cultivate your own floral haven effortlessly with our high-quality tulip bulbs. Transform your outdoor space into a mesmerizing tapestry of blossoms with ease. Shop now and let the elegance of Tulips grace your garden.', 2.0, 1, 'https://www.almanac.com/sites/default/files/styles/or/public/image_nodes/tulips-multicolored_0.jpg?itok=5KFk7THG', null, '2025-02-14 14:10:00', null),
     (2, 'Chamomile', 'Elevate your garden with our premium Chamomile planting material. Cultivate a serene oasis with these fragrant blooms. Shop now for a tranquil touch to your green space.', 1.7, 1, 'https://files.nccih.nih.gov/chamomile-steven-foster-square.jpg', NULL, '2025-02-15 11:55:00', NULL),
@@ -27,7 +27,7 @@ values
     (14, 'Rake', 'Maintain a pristine garden with our reliable Rake. Perfect for leaf and debris removal, it ensures a tidy outdoor space. Upgrade your gardening arsenal with this essential tool.', 38.0, 5, 'https://images.ctfassets.net/zma7thmmcinb/46JNtlvxFdhCD2XPHHziLc/31fe4425eff26086a7eb884a4384d85b/find-the-right-rake-plastic-rake.jpg', NULL, '2025-03-11 10:36:00', NULL),
     (15, 'Gardening scissors', 'Precision meets functionality with our Gardening Scissors. Trim and shape your garden with ease. Elevate your gardening skills with these sharp and durable scissors.', 20.0, 5, 'https://cdn.thewirecutter.com/wp-content/uploads/2015/06/pruningshears-2x1-.jpg?auto=webp&quality=75&crop=2:1&width=1024&dpr=2', NULL, '2025-03-12 12:16:00', NULL);
 
-INSERT INTO users (user_id, name, email, phone_number, password_hash, role)
+INSERT INTO users (id, name, email, phone_number, password_hash, role)
 VALUES
     (1, 'John Smith', 'john.smith@example.com', '1111111111', '$2a$10$QqLIc6MHjJ4eFyvBWHY5nOY6BCrjmzq/Xs5fqqi5COJmLUE27sojS', 'CLIENT'),
     (2, 'Emma Johnson', 'emma.johnson@example.com', '2222222222', '$2a$10$QqLIc6MHjJ4eFyvBWHY5nOY6BCrjmzq/Xs5fqqi5COJmLUE27sojS', 'CLIENT'),
@@ -45,19 +45,19 @@ VALUES
     (14, 'James Thomas', 'james.thomas@example.com', '1415161718', '$2a$10$QqLIc6MHjJ4eFyvBWHY5nOY6BCrjmzq/Xs5fqqi5COJmLUE27sojS', 'ADMINISTRATOR'),
     (15, 'William White', 'william.white@example.com', '1516171819', '$2a$10$QqLIc6MHjJ4eFyvBWHY5nOY6BCrjmzq/Xs5fqqi5COJmLUE27sojS', 'ADMINISTRATOR');
 
-insert into carts (cart_id, user_id)
+insert into carts (id, user_id)
 values
     (1, 1),
     (2, 2),
     (3, 5);
 
-insert into cart_items (cart_item_id, cart_id, product_id, quantity)
+insert into cart_items (id, cart_id, product_id, quantity)
 values
     (1, 1, 1, 3),
     (2, 2, 2, 2),
     (3, 3, 7, 7);
 
-insert into favorites (favorite_id, user_id, product_id)
+insert into favorites (id, user_id, product_id)
 values
     (1, 1, 10),
     (2, 2, 4),
@@ -73,7 +73,7 @@ values
     (12, 7, 11),
     (13, 7, 15);
 
-insert into orders (order_id, delivery_address, contact_phone, delivery_method, status, created_at, updated_at, user_id)
+insert into orders (id, delivery_address, contact_phone, delivery_method, status, created_at, updated_at, user_id)
 values
     (1, '123 Main St, City', '+49123456789', 'SELF_PICKUP', 'PENDING_PAYMENT', '2025-03-13 14:15:00', null, 1),
     (2, '456 Elm St, City', '+49123456790', 'COURIER_DELIVERY', 'CREATED', '2025-03-14 10:30:00', NULL, 2),
@@ -91,7 +91,7 @@ values
     (14, '369 Redwood St, City', '+49123456802', 'COURIER_DELIVERY', 'PAID', '2025-03-26 16:35:00', NULL, 14),
     (15, '147 Beech St, City', '+49123456803', 'SELF_PICKUP', 'IN_TRANSIT', '2025-03-27 09:20:00', NULL, 15);
 
-insert into order_items (order_item_id, order_id, product_id, quantity, price_at_purchase)
+insert into order_items (id, order_id, product_id, quantity, price_at_purchase)
 values
     (1, 1, 1, 2, 2.00),
     (2, 1, 2, 3, 1.7),

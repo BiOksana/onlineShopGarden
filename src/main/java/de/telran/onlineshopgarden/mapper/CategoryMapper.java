@@ -10,11 +10,9 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface CategoryMapper {
 
-    @Mapping(target = "name", source = "category")
-    @Mapping(target = "categoryId", ignore = true)
+    @Mapping(target = "id", ignore = true)
     Category dtoToEntity(CategoryDto dto);
 
-    @Mapping(target = "category", source = "name")
     CategoryDto entityToDto(Category entity);
 
     List<CategoryDto> entityListToDto(List<Category> entities);
