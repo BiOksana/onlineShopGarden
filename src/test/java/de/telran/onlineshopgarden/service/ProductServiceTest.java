@@ -54,7 +54,7 @@ class ProductServiceTest {
     @Test
     void getProductOfTheDayMustReturnProductWithMaxDiscount() {
         Product product = new Product();
-        product.setProductId(1);
+        product.setId(1L);
         product.setName("MaxDiscountProduct");
         product.setPrice(BigDecimal.valueOf(100));
         product.setDiscountPrice(BigDecimal.valueOf(60));
@@ -73,7 +73,7 @@ class ProductServiceTest {
 
     @Test
     void getByIdWhenProductNotFoundMustThrowException() {
-        when(productRepository.findById(99)).thenReturn(Optional.empty());
-        assertThrows(RuntimeException.class, () -> service.getById(99));
+        when(productRepository.findById(99L)).thenReturn(Optional.empty());
+        assertThrows(RuntimeException.class, () -> service.getById(99L));
     }
 }

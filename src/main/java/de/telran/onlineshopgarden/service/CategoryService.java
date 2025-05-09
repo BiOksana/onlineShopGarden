@@ -31,7 +31,7 @@ public class CategoryService {
         return mapper.entityListToDto(repository.findAll());
     }
 
-    public CategoryDto getById(Integer id) {
+    public CategoryDto getById(Long id) {
         Category category = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Category with id %d not found", id)));
         return mapper.entityToDto(category);
@@ -44,21 +44,21 @@ public class CategoryService {
     }
 
     @Transactional
-    public CategoryDto update(Integer id, CategoryDto dto) {
+    public CategoryDto update(Long id, CategoryDto dto) {
         Category category = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(String.format("Category with id %d not found", id)));
-        category.setName(dto.getCategory());
+        category.setName(dto.getName());
         category.setImageUrl(dto.getImageUrl());
         return mapper.entityToDto(category);
     }
 
     @Transactional
-    public void delete(Integer id) {
+    public void delete(Long id) {
         if (!repository.existsById(id)) {
             throw new ResourceNotFoundException(String.format("Category with id %d not found", id));
         }
 
-        if (productRepository.existsByCategoryCategoryId(id)) {
+        if (productRepository.existsByCategoryId(id)) {
             throw new ResourceDeletionException(String.format("Category with id %d cannot be deleted because it has associated products", id));
         }
 

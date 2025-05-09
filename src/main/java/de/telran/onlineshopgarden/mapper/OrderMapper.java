@@ -12,17 +12,17 @@ import java.util.List;
 public interface OrderMapper {
 
     @Mapping(target = "items", source = "orderItems")
-    @Mapping(target = "userId", source = "user.userId")
-    OrderDto entityToDto(Order order);
+    @Mapping(target = "userId", source = "user.id")
+    OrderDto entityToDto(Order entity);
 
     @Mapping(target = "user", ignore = true)
     @Mapping(target = "orderItems", source = "items")
     @Mapping(target = "status", constant = "CREATED")
-    @Mapping(target = "orderId", ignore = true)
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
-    Order createDtoToEntity(OrderCreateDto orderCreateDto);
+    Order createDtoToEntity(OrderCreateDto dto);
 
-    List<OrderDto> entityListToDtoList(List<Order> orders);
+    List<OrderDto> entityListToDtoList(List<Order> entities);
 
 }

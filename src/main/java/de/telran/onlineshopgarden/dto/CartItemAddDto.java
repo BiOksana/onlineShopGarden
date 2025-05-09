@@ -13,10 +13,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class CartItemAddDto {
 
-    private String productId;
+    private Long productId;
 
     @NotNull(message = "{validation.cartItem.quantityNotBlank}")
     @Min(value = 1, message = "{validation.cartItem.quantityMin}")
     private Integer quantity;
-
 }

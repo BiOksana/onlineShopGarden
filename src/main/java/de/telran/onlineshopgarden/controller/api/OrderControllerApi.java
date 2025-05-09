@@ -34,7 +34,7 @@ public interface OrderControllerApi {
     })
     ResponseEntity<OrderDto> getById(
             @Parameter(description = "The ID of the order to retrieve", required = true)
-            @PathVariable Integer orderId);
+            @PathVariable Long orderId);
 
     @Operation(summary = "Get order history by user id for the currently authenticated user")
     @ApiResponses(value = {
@@ -63,5 +63,5 @@ public interface OrderControllerApi {
     })
     ResponseEntity<Void> cancelOrder(
             @Parameter(description = "The ID of the order to cancel", required = true)
-            @PathVariable Integer orderId);
+            @PathVariable Long orderId);
 }

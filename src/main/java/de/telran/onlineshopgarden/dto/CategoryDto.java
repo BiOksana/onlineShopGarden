@@ -13,11 +13,11 @@ import lombok.Setter;
 @Setter
 public class CategoryDto {
 
-    private String categoryId;
+    private Long id;
 
     @NotBlank(message = "{validation.category.name}")
     @Pattern(regexp = "^[A-Z][A-Za-z -]{3,100}$", message = "{validation.category.nameSize}")
-    private String category;
+    private String name;
 
     @NotBlank(message = "{validation.category.imageUrlNotBlank}")
     @Pattern(regexp = "^https://[^\\s/$.?#][^\\s]{0,140}\\.(jpg|jpeg|png)(\\?.*)?$",

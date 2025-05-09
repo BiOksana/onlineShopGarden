@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface FavoriteRepository extends JpaRepository<Favorite, Integer> {
+public interface FavoriteRepository extends JpaRepository<Favorite, Long> {
 
     @Modifying
-    void deleteByUserUserId(Integer userId);
+    void deleteByUserId(Long userId);
 
     @Modifying
-    void deleteByProductProductId(Integer productId);
+    void deleteByProductId(Long productId);
 }

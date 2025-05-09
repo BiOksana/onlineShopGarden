@@ -45,7 +45,7 @@ public class UserService {
         return mapper.entityListToDto(repository.findAll());
     }
 
-    public UserDto getById(Integer id) {
+    public UserDto getById(Long id) {
         User user = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " not found"));
         return mapper.entityToDto(user);
@@ -59,7 +59,7 @@ public class UserService {
     }
 
    @Transactional
-    public UserDto update(Integer id, UserUpdateDto dto) {
+    public UserDto update(Long id, UserUpdateDto dto) {
        User user = getUserAndCheckAccess(id);
 
        user.setName(dto.getName());
@@ -68,43 +68,43 @@ public class UserService {
     }
 
     @Transactional
-    public void mask(Integer id) {
+    public void mask(Long id) {
         User user = getUserAndCheckAccess(id);
         preventAdminSelfDeletion(id);
 
-        favoriteRepository.deleteByUserUserId(id);
-        cartRepository.deleteByUserUserId(id);
+        favoriteRepository.deleteByUserId(id);
+        cartRepository.deleteByUserId(id);
         orderService.anonymizeUserDataInOrders(user);
         anonymizeUserData(user);
     }
 
     private void anonymizeUserData(User user) {
         user.setName("Deleted User");
-        user.setEmail("deleted_" + user.getUserId() + "@example.com");
+        user.setEmail("deleted_" + user.getId() + "@example.com");
         user.setPhoneNumber("0000000000");
         user.setPasswordHash("DELETED");
         user.setRefreshToken(null);
     }
 
-    private User getUserAndCheckAccess(Integer id) {
+    private User getUserAndCheckAccess(Long id) {
         User user = repository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " not found"));
 
         User authUser = authService.getCurrentUser();
         boolean isAdmin = authService.isCurrentUserAdmin();
 
-        if (!id.equals(authUser.getUserId()) && !isAdmin) {
+        if (!id.equals(authUser.getId()) && !isAdmin) {
             throw new AccessForbiddenException("You cannot change another user");
         }
 
         return user;
     }
 
-    private void preventAdminSelfDeletion(Integer targetUserId) {
+    private void preventAdminSelfDeletion(Long targetUserId) {
         User currentUser = authService.getCurrentUser();
         boolean isAdmin = authService.isCurrentUserAdmin();
 
-        if (isAdmin && targetUserId.equals(currentUser.getUserId())) {
+        if (isAdmin && targetUserId.equals(currentUser.getId())) {
             throw new AccessForbiddenException("Admin cannot delete their own account.");
         }
     }

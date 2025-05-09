@@ -11,18 +11,18 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface ProductMapper {
 
-    @Mapping(target = "categoryId", source = "category.categoryId")
+    @Mapping(target = "categoryId", source = "category.id")
     @Mapping(target = "image", source = "imageUrl")
-    ProductDto entityToDto(Product product);
+    ProductDto entityToDto(Product entity);
 
     @Mapping(target = "category", ignore = true)
     @Mapping(target = "imageUrl", source = "image")
-    @Mapping(target = "productId", ignore = true)
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", ignore = true)
     Product createOrUpdateDtoToEntity(ProductDto dto);
 
-    List<ProductDto> entityListToDtoList(List<Product> productList);
+    List<ProductDto> entityListToDtoList(List<Product> entities);
 
     default Page<ProductDto> toDtoPage(Page<Product> products) {
         return products.map(this::entityToDto);

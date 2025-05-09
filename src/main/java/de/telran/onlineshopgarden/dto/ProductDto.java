@@ -18,7 +18,7 @@ import java.math.BigDecimal;
 @Setter
 public class ProductDto {
 
-    private String productId;
+    private Long id;
 
     @NotBlank(message = "{validation.product.name}")
     @Pattern(regexp = "[A-Za-z ]{1,45}", message = "{validation.product.name}")
@@ -32,7 +32,7 @@ public class ProductDto {
     private BigDecimal price;
 
     @NotNull(message = "{validation.product.categoryId}")
-    private Integer categoryId;
+    private Long categoryId;
 
     @NotNull(message = "{validation.product.imageNotNull}")
     @Pattern(regexp = "^https://[^\\s/$.?#][^\\s]{0,140}\\.(jpg|jpeg|png)(\\?.*)?$", message = "{validation.product.imageValidation}")

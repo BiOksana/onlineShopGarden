@@ -32,7 +32,7 @@ public class OrderController implements OrderControllerApi {
 
     @GetMapping("{orderId}")
     @PreAuthorize("hasAnyRole('ROLE_CLIENT', 'ROLE_ADMINISTRATOR')")
-    public ResponseEntity<OrderDto> getById(@PathVariable Integer orderId) {
+    public ResponseEntity<OrderDto> getById(@PathVariable Long orderId) {
         return ResponseEntity.ok(service.getById(orderId));
     }
 
@@ -48,7 +48,7 @@ public class OrderController implements OrderControllerApi {
     }
 
     @PatchMapping("{orderId}")
-    public ResponseEntity<Void> cancelOrder(@PathVariable Integer orderId) {
+    public ResponseEntity<Void> cancelOrder(@PathVariable Long orderId) {
         service.cancelOrder(orderId);
         return ResponseEntity.ok().build();
     }

@@ -39,7 +39,7 @@ public class ProductController implements ProductControllerApi {
     }
 
     @GetMapping("{productId}")
-    public ResponseEntity<ProductDto> getById(@PathVariable Integer productId) {
+    public ResponseEntity<ProductDto> getById(@PathVariable Long productId) {
         return ResponseEntity.ok(service.getById(productId));
     }
 
@@ -56,13 +56,13 @@ public class ProductController implements ProductControllerApi {
 
     @PreAuthorize("hasRole('ROLE_ADMINISTRATOR')")
     @PutMapping("{productId}")
-    public ResponseEntity<ProductDto> update(@PathVariable Integer productId, @Valid @RequestBody ProductDto dto) {
+    public ResponseEntity<ProductDto> update(@PathVariable Long productId, @Valid @RequestBody ProductDto dto) {
         return new ResponseEntity<>(service.update(productId, dto), HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMINISTRATOR')")
     @PatchMapping("{productId}")
-    public ResponseEntity<ProductDto> setDiscountPrice(@PathVariable Integer productId,
+    public ResponseEntity<ProductDto> setDiscountPrice(@PathVariable Long productId,
                                                        @DecimalMin(value = "0.01", message = "{validation.product.discountPrice}") @RequestParam(required = false) BigDecimal discountPrice) {
         ProductDto updatedProduct = service.setDiscountPrice(productId, discountPrice);
         return ResponseEntity.ok(updatedProduct);
@@ -70,7 +70,7 @@ public class ProductController implements ProductControllerApi {
 
     @PreAuthorize("hasRole('ROLE_ADMINISTRATOR')")
     @DeleteMapping("{productId}")
-    public ResponseEntity<Void> delete(@PathVariable Integer productId) {
+    public ResponseEntity<Void> delete(@PathVariable Long productId) {
         service.delete(productId);
         return ResponseEntity.ok().build();
     }

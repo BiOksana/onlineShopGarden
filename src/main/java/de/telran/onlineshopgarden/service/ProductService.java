@@ -45,7 +45,7 @@ public class ProductService {
         return mapper.toDtoPage(repository.findProducts(filterRequest, pageable));
     }
 
-    public ProductDto getById(Integer id) {
+    public ProductDto getById(Long id) {
         Product product = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Product with id %d not found", id)));
         return mapper.entityToDto(product);
     }
@@ -64,21 +64,21 @@ public class ProductService {
     }
 
     @Transactional
-    public ProductDto update(Integer id, ProductDto dto) {
+    public ProductDto update(Long id, ProductDto dto) {
         if (!repository.existsById(id)) {
             throw new ResourceNotFoundException(String.format("Product with id %d not found", id));
         }
 
         Product product = mapper.createOrUpdateDtoToEntity(dto);
-        product.setProductId(id);
+        product.setId(id);
         product.setCategory(categoryRepository.getReferenceById(dto.getCategoryId()));
 
         return mapper.entityToDto(repository.save(product));
     }
 
     @Transactional
-    public ProductDto setDiscountPrice(Integer productId, BigDecimal discountPrice) {
-        Product product = repository.findById(productId).orElseThrow(() -> new ResourceNotFoundException(String.format("Product with id %d not found", productId)));
+    public ProductDto setDiscountPrice(Long id, BigDecimal discountPrice) {
+        Product product = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(String.format("Product with id %d not found", id)));
 
         if (discountPrice != null && (discountPrice.compareTo(new BigDecimal("0.00")) <= 0 || discountPrice.compareTo(product.getPrice()) >= 0)) {
             throw new BadRequestException("Discount price must be bigger than 0 and smaller than " + product.getPrice());
@@ -89,7 +89,7 @@ public class ProductService {
     }
 
     @Transactional
-    public void delete(Integer id) {
+    public void delete(Long id) {
         if (!repository.existsById(id)) {
             throw new ResourceNotFoundException(String.format("Product with id %d not found", id));
         }
@@ -98,7 +98,7 @@ public class ProductService {
             throw new ResourceDeletionException(String.format("Product with id %d cannot be deleted because it has associated orders", id));
         }
 
-        favoriteRepository.deleteByProductProductId(id);
+        favoriteRepository.deleteByProductId(id);
 
         cartItemRepository.deleteByProductId(id);
 

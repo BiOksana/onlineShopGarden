@@ -18,7 +18,8 @@ public class Favorite {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer favoriteId;
+    @Column(columnDefinition = "int")
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -32,11 +33,11 @@ public class Favorite {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Favorite favorite = (Favorite) o;
-        return Objects.equals(favoriteId, favorite.favoriteId);
+        return Objects.equals(id, favorite.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(favoriteId);
+        return Objects.hashCode(id);
     }
 }

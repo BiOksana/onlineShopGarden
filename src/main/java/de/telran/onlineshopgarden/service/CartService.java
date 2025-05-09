@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
 @Service
 @Transactional(readOnly = true)
 public class CartService {
@@ -33,15 +32,15 @@ public class CartService {
 
     public CartDto getByUserId() {
         User user = authService.getCurrentUser();
-        return repository.findByUserUserId(user.getUserId())
+        return repository.findByUserId(user.getId())
                 .map(mapper::entityToDto)
-                .orElseThrow(() -> new ResourceNotFoundException(String.format("Cart by user with id %d not found", user.getUserId())));
+                .orElseThrow(() -> new ResourceNotFoundException(String.format("Cart by user with id %d not found", user.getId())));
     }
 
     @Transactional
     public void addItem(CartItemAddDto dto) {
         User user = authService.getCurrentUser();
-        final Cart cart = repository.findByUserUserId(user.getUserId())
+        final Cart cart = repository.findByUserId(user.getId())
                 .orElse(new Cart(user));
 
         CartItem cartItem = cartItemMapper.dtoToEntity(dto);
@@ -60,6 +59,6 @@ public class CartService {
     @Transactional
     public void deleteByUserId() {
         User user = authService.getCurrentUser();
-        repository.deleteByUserUserId(user.getUserId());
+        repository.deleteByUserId(user.getId());
     }
 }
